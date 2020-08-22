@@ -10,9 +10,13 @@ AutoHotKey https://www.autohotkey.com/ - Current Version
 
 Just need to have all of the files downloaded in the same folder.
 
-In Bluestacks you will need to set up your hotkeys.
+In Bluestacks you will need to set up your hotkeys, see following for examples:
 
-When you are ready open blitz screen and select your last saved squad (i.e. 28/28).  Then run the appropriate script.  Either fullBlitz for one rotation, or  fullBlitzOvernight for 4 rotations in a row.
+![Hotkey Placement](images/hotkey1.PNG?raw=true "Hotkeys")
+
+![Hotkey Placement](images/hotkey2.PNG?raw=true "Hotkeys")
+
+When you are ready open blitz screen and select your last saved squad (i.e. 28/28).  Then run the appropriate script.  Either **fullBlitz** for one rotation, or  **fullBlitzOvernight** for 4 rotations in a row.
 
 # Optional Features
 ## Email Notificaiton 
