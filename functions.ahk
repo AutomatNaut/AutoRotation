@@ -203,6 +203,7 @@ isBattleReady()
 			global MyErrorCount
 			MyErrorCount++
 			
+			resizeWindow()
 			break
 		}
 		else
@@ -237,6 +238,7 @@ isThreeSpeedReady()
 			global MyErrorCount
 			MyErrorCount++
 			
+			resizeWindow()
 			break
 		}
 		else
@@ -271,6 +273,7 @@ isRewardsVisible()
 			global MyErrorCount
 			MyErrorCount++
 			
+			resizeWindow()
 			break
 		}
 		else
@@ -355,6 +358,19 @@ checkForErrors()
 	}
 }
 
+resizeWindow()
+{
+	activateBluestacks()
+	
+	randomSleep(2319, 3122)
+	MouseClickDrag, L, 1631, 300, 1250, 300
+	randomSleep(2319, 3122)
+	MouseClickDrag, L, 1250, 300, 1631, 300
+	randomSleep(2319, 3122)
+	MouseClick, left, 1600, 20
+	randomSleep(2319, 3122)
+	MouseClick, left, 1541, 20
+}
 doFullBlitzRotation(TargetBlitzTier, TotalTeams)
 {
 	TeamsUsed = 0
@@ -468,7 +484,7 @@ doFullBlitzRotation(TargetBlitzTier, TotalTeams)
 		else
 		{
 			findOpponent(0, 5)
-			isBattleReady()	  
+			isBattleReady()
 			pressKey("w")
 		}
 
