@@ -164,6 +164,8 @@ isMatchDone()
 			global MyErrorCount
 			MyErrorCount++
 			
+			resizeWindow()
+			
 			break
 		}
 		else
@@ -204,6 +206,7 @@ isBattleReady()
 			MyErrorCount++
 			
 			resizeWindow()
+			
 			break
 		}
 		else
@@ -239,6 +242,7 @@ isThreeSpeedReady()
 			MyErrorCount++
 			
 			resizeWindow()
+			
 			break
 		}
 		else
@@ -274,6 +278,7 @@ isRewardsVisible()
 			MyErrorCount++
 			
 			resizeWindow()
+			
 			break
 		}
 		else
@@ -371,6 +376,7 @@ resizeWindow()
 	randomSleep(2319, 3122)
 	MouseClick, left, 1541, 20
 }
+
 doFullBlitzRotation(TargetBlitzTier, TotalTeams)
 {
 	TeamsUsed = 0
