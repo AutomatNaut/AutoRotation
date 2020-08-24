@@ -44,9 +44,9 @@ logMessage(logMsg)
 	FileAppend, %CurrentDate% %CurrentTime%: %logMsg%`n, %LogFileName%
 }
 
-findOpponent(min, max)
+findOpponent(minOpp, maxOpp)
 {
-	Random, timesToSearch, min, max
+	Random, timesToSearch, minOpp, maxOpp
 	msg := "Finding " timesToSearch " Opponents"
 	logMessage(msg)
 	Loop, %timesToSearch%
@@ -426,7 +426,6 @@ doFullBlitzRotation(TargetBlitzTier, TotalTeams)
 		}
 		else
 		{
-			activateBluestacks()
 			pressKey("w")
 		}
 
@@ -438,7 +437,6 @@ doFullBlitzRotation(TargetBlitzTier, TotalTeams)
 		randomSleep(1306, 3482)
 		; Next Team
 		NextLoseTeam:
-		activateBluestacks()
 		pressKey("r")
 		randomSleep(5304, 9196)
 
@@ -455,7 +453,7 @@ doFullBlitzRotation(TargetBlitzTier, TotalTeams)
 
 	Loop % TotalTeams - TeamsUsed
 	{
-		findOpponent(1, 6)
+		findOpponent(1, 1)
 		randomSleep(3624, 6606)
 
 		isBattleReady()
@@ -469,14 +467,14 @@ doFullBlitzRotation(TargetBlitzTier, TotalTeams)
 		}
 		else
 		{
-			activateBluestacks()
+			findOpponent(0, 5)
+			isBattleReady()	  
 			pressKey("w")
 		}
 
 		isThreeSpeedReady()
 
 		; Auto
-		activateBluestacks()
 		pressKey("e")
 		
 		; In case get stuck on loss screen
@@ -509,7 +507,6 @@ doFullBlitzRotation(TargetBlitzTier, TotalTeams)
 		}
 		else
 		{
-			activateBluestacks()
 			pressKey("w")
 		}
 
@@ -520,7 +517,6 @@ doFullBlitzRotation(TargetBlitzTier, TotalTeams)
 
 		; Next Team
 		NextTeam:
-		activateBluestacks()
 		pressKey("r")
 		randomSleep(3105, 5612)
 		
