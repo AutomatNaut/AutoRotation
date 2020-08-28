@@ -377,6 +377,17 @@ resizeWindow()
 	MouseClick, left, 1541, 20
 }
 
+changeResolution()
+{
+	Run, powershell -File %MacroFolderPath%\changeResolution.ps1
+	randomSleep(5812, 7152)
+}
+
+logout()
+{
+	Run, powershell -File %MacroFolderPath%\logoff.ps1
+}
+
 doFullBlitzRotation(TargetBlitzTier, TotalTeams)
 {
 	TeamsUsed = 0

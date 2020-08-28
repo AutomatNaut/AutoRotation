@@ -28,7 +28,11 @@ MyErrorCount = 0
 ReportedErrorCount = 0
 LossTally := ""
 
+changeResolution()
+
 doFullBlitzRotation(TargetBlitzTier, TotalTeams)
+
+changeResolution()
 
 ExitApp
 
