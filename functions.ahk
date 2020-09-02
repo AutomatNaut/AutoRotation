@@ -254,6 +254,17 @@ isThreeSpeedReady()
 	}
 }
 
+disconnectRemoteDesktop()
+{
+	global MacroFolderPath
+
+	RunWait, %MacroFolderPath%\RDPDisconnect.lnk
+	
+	logMessage("Disconnected RDP Session.")
+	
+	randomSleep(9586, 12198)
+}
+
 isRewardsVisible()
 {
 	RewardsTimesLooped = 0
@@ -300,11 +311,11 @@ sendEmailNotification(Subject, Body, Attachment1:="", Attachment2:="")
 	
 	if(Attachment1 = "" and Attachment2 = "")
 	{
-		Run, powershell -File %MacroFolderPath%\SendEmailNotification.ps1 --Subject "%Subject%" --Body "%Body%"
+		RunWait, powershell -File %MacroFolderPath%\SendEmailNotification.ps1 --Subject "%Subject%" --Body "%Body%"
 	}
 	else
 	{
-		Run, powershell -File %MacroFolderPath%\SendEmailNotification.ps1 --Subject "%Subject%" --Body "%Body%" --Attachment1 %Attachment1% --Attachment2 %Attachment2%
+		RunWait, powershell -File %MacroFolderPath%\SendEmailNotification.ps1 --Subject "%Subject%" --Body "%Body%" --Attachment1 %Attachment1% --Attachment2 %Attachment2%
 	}
 }
 
@@ -379,13 +390,13 @@ resizeWindow()
 
 changeResolution()
 {
-	Run, powershell -File %MacroFolderPath%\changeResolution.ps1
+	RunWait, PowerShell.exe -ExecutionPolicy Bypass -file %MacroFolderPath%\changeResolution.ps1
 	randomSleep(5812, 7152)
 }
 
 logout()
 {
-	Run, powershell -File %MacroFolderPath%\logoff.ps1
+	RunWait, powershell -File %MacroFolderPath%\logoff.ps1
 }
 
 doFullBlitzRotation(TargetBlitzTier, TotalTeams)
@@ -506,6 +517,7 @@ doFullBlitzRotation(TargetBlitzTier, TotalTeams)
 		}
 
 		isThreeSpeedReady()
+		set3TimesSpeed()
 
 		; Auto
 		pressKey("e")
