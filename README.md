@@ -10,7 +10,7 @@ AutoHotKey https://www.autohotkey.com/ - Current Version
 
 Just need to have all of the files downloaded in the same folder.
 
-In Bluestacks you will need to set up your hotkeys, see following for examples.  In Blue Stack go to Game Controls -> Advanced Editor and Import the Strike Force.cfg file:
+In Bluestacks you will need to set up your hotkeys, see following for examples.  In Blue Stack go to Game Controls -> Advanced Editor and Import the Strike Force.cfg file.  This shold set up all of the hotkeys:
 
 ![Hotkey Placement](images/hotkey1.PNG?raw=true "Hotkeys")
 
