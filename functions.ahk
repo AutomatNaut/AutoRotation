@@ -60,7 +60,7 @@ isBlitzCoresOrCredits()
 {
 	activateBluestacks()
 	
-	PixelGetColor, ColorFound, 843, 691
+	PixelGetColor, ColorFound, 851, 699
 	msg := "Pixel Get Color Results (Cores or Credits): " ColorFound
 	logMessage(msg)
 
@@ -226,7 +226,7 @@ isThreeSpeedReady()
 	{
 		activateBluestacks()
 	
-		PixelGetColor, TSColorFound, 73,294
+		PixelGetColor, TSColorFound, 74,294
 		msg := "Pixel Get Color Results (3 Speed): " TSColorFound
 		logMessage(msg)
 		
@@ -311,11 +311,11 @@ sendEmailNotification(Subject, Body, Attachment1:="", Attachment2:="")
 	
 	if(Attachment1 = "" and Attachment2 = "")
 	{
-		RunWait, powershell -File %MacroFolderPath%\SendEmailNotification.ps1 --Subject "%Subject%" --Body "%Body%"
+		RunWait, PowerShell.exe -ExecutionPolicy Bypass -file %MacroFolderPath%\SendEmailNotification.ps1 --Subject "%Subject%" --Body "%Body%"
 	}
 	else
 	{
-		RunWait, powershell -File %MacroFolderPath%\SendEmailNotification.ps1 --Subject "%Subject%" --Body "%Body%" --Attachment1 %Attachment1% --Attachment2 %Attachment2%
+		RunWait, PowerShell.exe -ExecutionPolicy Bypass -file %MacroFolderPath%\SendEmailNotification.ps1 --Subject "%Subject%" --Body "%Body%" --Attachment1 %Attachment1% --Attachment2 %Attachment2%
 	}
 }
 
@@ -396,7 +396,7 @@ changeResolution()
 
 logout()
 {
-	RunWait, powershell -File %MacroFolderPath%\logoff.ps1
+	RunWait, PowerShell.exe -ExecutionPolicy Bypass -file %MacroFolderPath%\logoff.ps1
 }
 
 doFullBlitzRotation(TargetBlitzTier, TotalTeams)
@@ -586,4 +586,151 @@ doFullBlitzRotation(TargetBlitzTier, TotalTeams)
 	emailbody := "Wins: " Wins ", Losses: " Losses ", Duration: " Round(ElapsedTime/60000, 2) " min, Errors: " MyErrorCount ", Loses at: " LossTally
 	
 	sendEmailNotification(emailSubject, emailbody, startFileName, endFileName)
+}
+
+doRTALoop()
+{
+	CurrentDate := A_YYYY "-" A_MM "-" A_DD
+	CurrentTime := A_Hour "-" A_Min "-" A_Sec "." A_MSec
+
+	global MacroFolderPath
+
+	startFileName := MacroFolderPath "\logs\BlitzStart_Tier" TargetBlitzTier "_" CurrentDate "_" CurrentTime ".png"
+
+	TakeScreenshot(startFileName)
+
+	StartTime := A_TickCount
+
+	msg := "Starting RTA Loopsure"
+	logMessage(msg)
+
+	Wins = 0
+	Losses = 0
+
+	Loop
+	{
+		activateBluestacks()	
+		
+		rtaBattleReady()
+		randomSleep(3124, 5608)
+		
+		rtaBattleReady()
+		randomSleep(25124, 27906)
+		
+		; Auto 70, 167
+		isAutoReady()
+		pressKey("e")
+		randomSleep(28124, 32906)
+		
+		; 980, 480 white is Win
+		; 920 545 defeat
+		
+		; check if continue is present
+		; 883, 811
+		isRTAMatchDone()
+		pressKey("w")
+		
+		randomSleep(2319, 4222)
+	}
+	
+	logMessage("Ending RTA Loops.")
+	; winLossMsg := "Record W:" Wins " L:" Losses
+	logMessage(winLossMsg)
+
+	ElapsedTime := A_TickCount - StartTime
+
+	CurrentDate := A_YYYY "-" A_MM "-" A_DD
+	CurrentTime := A_Hour "-" A_Min "-" A_Sec "." A_MSec
+
+	global MacroFolderPath
+	endFileName := MacroFolderPath "\logs\BlitzEnd_Tier" TargetBlitzTier "_W" Wins "_L" Losses "_" CurrentDate "_" CurrentTime ".png"
+
+	TakeScreenshot(endFileName)
+	
+	emailSubject := "Blitz Tier " TargetBlitzTier " Complete at " A_Hour ":" A_Min ":" A_Sec
+	global MyErrorCount
+	emailbody := "Wins: " Wins ", Losses: " Losses ", Duration: " Round(ElapsedTime/60000, 2) " min, Errors: " MyErrorCount ", Loses at: " LossTally
+	
+	sendEmailNotification(emailSubject, emailbody, startFileName, endFileName)
+}
+
+rtaBattleReady()
+{
+	msg := "RTA Battle/Ready"
+	logMessage(msg)
+
+	pressKey("q")
+    randomSleep(1188, 2251)
+}
+
+isAutoReady()
+{
+	AutoTimesLooped = 0
+
+	Loop
+	{
+		activateBluestacks()
+	
+		PixelGetColor, aColorFound, 70, 167
+		msg := "Pixel Get Color Results (Auto): " aColorFound
+		logMessage(msg)
+		
+		if(aColorFound = 0xE7E7E7)
+		{
+			break
+		}
+		else if (AutoTimesLooped > 20)
+		{
+			logMessage("isAutoReady looped too many times")
+			
+			global MyErrorCount
+			MyErrorCount++
+			
+			resizeWindow()
+			
+			break
+		}
+		else
+		{
+    		randomSleep(1729, 3472)
+    	}
+    	
+    	AutoTimesLooped++
+	}
+}
+
+isRTAMatchDone()
+{
+	rtamTimesLooped = 0
+
+	Loop
+	{
+		activateBluestacks()
+		
+		PixelGetColor, rtamColorFound, 883, 811
+		msg := "Pixel Get Color Results (RTA Continue): " rtamColorFound
+		logMessage(msg)
+		
+		if(rtamColorFound = 0xFFFFFF)
+		{
+			break
+		}
+		else if (rtamTimesLooped > 27)
+		{
+			logMessage("rtamTimesLooped looped too many times")
+			
+			global MyErrorCount
+			MyErrorCount++
+			
+			resizeWindow()
+			
+			break
+		}
+		else
+		{
+    		randomSleep(5195, 7621)
+    	}
+    	
+    	rtamTimesLooped++
+	}
 }
