@@ -6,6 +6,8 @@ BlueStacks https://www.bluestacks.com/
 
 AutoHotKey https://www.autohotkey.com/ - Current Version
 
+Resolution: Will need minimum resolution of 1920 x 1080, also important that UI scaling is at 100%
+
 # Installation
 
 Just need to have all of the files downloaded in the same folder.
